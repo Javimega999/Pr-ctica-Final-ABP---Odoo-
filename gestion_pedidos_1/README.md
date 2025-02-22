@@ -1,25 +1,28 @@
-# Contents of README.md
+# 🚀 Gestión de Pedidos - Odoo  
 
-# Gestion Pedidos Module
+📦 **Módulo para la gestión de pedidos, clientes y productos en Odoo**  
 
-## Overview
-The `gestion_pedidos` module is designed for managing orders, clients, and products within the Odoo framework. It provides a comprehensive solution for order management, including data models, views, and access control.
+## 📌 Descripción  
+El módulo `gestion_pedidos` está diseñado para facilitar la gestión de pedidos dentro del ecosistema de Odoo. Proporciona un sistema completo que incluye modelos de datos, vistas personalizadas y control de acceso.  
 
-## Features
-- **Data Models**: Defines models for clients, products, and orders with relational fields.
-- **Data Validation**: Implements methods and constraints to ensure data integrity.
-- **XML Views**: Provides form, list, and kanban views for user interaction.
-- **Access Control**: Configures security settings to manage user permissions.
-- **Demo Data**: Includes demo data for testing and demonstration purposes.
+## ✨ Características  
+✅ **Modelos de Datos**: Gestión de clientes, productos y pedidos con relaciones entre ellos.  
+✅ **Validación de Datos**: Métodos y restricciones para garantizar la integridad de la información.  
+✅ **Vistas en XML**: Interfaces optimizadas en forma de listas, formularios y vista Kanban.  
+✅ **Control de Acceso**: Configuración de seguridad para gestionar permisos de usuarios.  
+✅ **Datos de Prueba**: Incluye datos de demostración para facilitar la implementación y pruebas.  
 
-## Installation
-To install the module, place it in the Odoo addons directory and update the app list. Then, install the `gestion_pedidos` module from the Odoo interface.
+## 🛠 Instalación  
+1. 📂 Copia el módulo en el directorio `addons` de Odoo.  
+2. 🔄 Actualiza la lista de aplicaciones desde la interfaz de Odoo.  
+3. 📌 Busca `Gestión de Pedidos` y haz clic en **Instalar**.  
 
-## Usage
-Once installed, users can access the module from the main Odoo menu, where they can create and manage orders, clients, and products.
+## 🎯 Uso  
+Una vez instalado, accede al módulo desde el menú principal de Odoo. Desde ahí, podrás gestionar pedidos, clientes y productos de manera sencilla.  
 
-## Author
-[Your Name]
+## 👤 Autor  
+👨‍💻 **Javier Ramírez Fernández**  
 
-## License
-This module is licensed under the [Your License].
+
+
+
