@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_factura">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="row">
+                            <div class="col-6">
+                                <h2>Factura #<span t-field="doc.name"/></h2>
+                                <p>Fecha: <span t-field="doc.date"/></p>
+                            </div>
+                            <div class="col-6">
+                                <div t-field="doc.partner_id" 
+                                     t-options='{"widget": "contact", "fields": ["name", "address", "phone"], "no_marker": True}'/>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.pedido_line_ids" t-as="line">
+                                    <td><span t-field="line.product_id.name"/></td>
+                                    <td><span t-field="line.quantity"/></td>
+                                    <td><span t-field="line.price_unit"/></td>
+                                    <td><span t-field="line.subtotal"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

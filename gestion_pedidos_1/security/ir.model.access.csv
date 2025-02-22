@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gestion_pedidos_pedido,access.gestion.pedidos.pedido,model_gestion_pedidos_pedido,sales_team.group_sale_salesman,1,1,1,1
+access_gestion_pedidos_linea_pedido,access.gestion.pedidos.linea.pedido,model_gestion_pedidos_linea_pedido,sales_team.group_sale_salesman,1,1,1,1
+access_product_template_gestion,product.template.gestion,product.model_product_template,sales_team.group_sale_salesman,1,1,1,1
+access_product_product_gestion,product.product.gestion,product.model_product_product,sales_team.group_sale_salesman,1,1,1,1
+access_res_partner_gestion,res.partner.gestion,base.model_res_partner,sales_team.group_sale_salesman,1,1,1,1
+access_product_gestion,product.gestion,model_gestion_pedidos_producto,sales_team.group_sale_salesman,1,1,1,1
+access_cliente_gestion,cliente.gestion,model_gestion_pedidos_cliente,sales_team.group_sale_salesman,1,1,1,1

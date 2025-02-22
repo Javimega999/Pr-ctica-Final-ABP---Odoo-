@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action definition -->
+    <record id="action_pedidos_view" model="ir.actions.act_window">
+        <field name="name">Pedidos</field>
+        <field name="res_model">gestion_pedidos.pedido</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear el primer pedido
+            </p>
+        </field>
+    </record>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_gestion_pedidos_root" 
+              name="Gestión de Pedidos" 
+              web_icon="gestion_pedidos,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Submenus -->
+    <menuitem id="menu_pedidos_root"
+              name="Pedidos"
+              parent="menu_gestion_pedidos_root"
+              sequence="10"/>
+
+    <menuitem id="menu_pedidos"
+              name="Pedidos"
+              parent="menu_pedidos_root"
+              action="action_pedidos_view"
+              sequence="10"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_gestion_pedidos_config"
+              name="Configuración"
+              parent="menu_gestion_pedidos_root"
+              sequence="100"/>
+              
+    <menuitem id="menu_reports"
+        name="Informes"
+        parent="menu_gestion_pedidos_root"
+        sequence="30"/>
+
+    <menuitem id="menu_report_ventas"
+        name="Informes de Ventas"
+        parent="menu_reports"
+        action="action_report_ventas"
+        sequence="10"/>
+</odoo>

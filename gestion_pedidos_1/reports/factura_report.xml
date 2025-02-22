@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Report template definition -->
+    <template id="report_factura_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Factura <span t-field="doc.name"/></h2>
+                
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <strong>Cliente:</strong>
+                        <p t-field="doc.cliente.name"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Fecha:</strong>
+                        <p t-field="doc.fecha_pedido"/>
+                    </div>
+                </div>
+
+                <table class="table table-sm mt-4">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.lineas_pedido" t-as="line">
+                            <td><span t-field="line.producto_id.name"/></td>
+                            <td><span t-field="line.cantidad"/></td>
+                            <td><span t-field="line.precio_unitario"/></td>
+                            <td><span t-field="line.subtotal"/></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Total</strong></td>
+                            <td><span t-field="doc.total"/></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <!-- Main template -->
+    <template id="report_factura">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="gestion_pedidos_1.report_factura_document"/>
+            </t>
+        </t>
+    </template>
+
+    <!-- Report template definition -->
+    <template id="report_ventas">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Informe de Ventas</h2>
+                    
+                    <!-- Summary Section -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h3>Resumen de Ventas</h3>
+                            <p>Total Pedidos: <t t-esc="len(docs)"/></p>
+                            <p>Total Ventas: <t t-esc="sum(doc.total for doc in docs)"/></p>
+                        </div>
+                    </div>
+
+                    <!-- Details Table -->
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Referencia</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="pedido">
+                                <td><span t-field="pedido.name"/></td>
+                                <td><span t-field="pedido.cliente.name"/></td>
+                                <td><span t-field="pedido.fecha_pedido"/></td>
+                                <td><span t-field="pedido.estado"/></td>
+                                <td><span t-field="pedido.total"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Report action registration -->
+    <record id="action_report_factura" model="ir.actions.report">
+        <field name="name">Factura</field>
+        <field name="model">gestion_pedidos.pedido</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gestion_pedidos_1.report_factura</field>
+        <field name="report_file">gestion_pedidos_1.report_factura</field>
+        <field name="binding_model_id" ref="model_gestion_pedidos_pedido"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Action -->
+    <record id="action_report_ventas" model="ir.actions.report">
+        <field name="name">Informe de Ventas</field>
+        <field name="model">gestion_pedidos.pedido</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gestion_pedidos_1.report_ventas</field>
+        <field name="report_file">gestion_pedidos_1.report_ventas</field>
+        <field name="binding_model_id" ref="model_gestion_pedidos_pedido"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

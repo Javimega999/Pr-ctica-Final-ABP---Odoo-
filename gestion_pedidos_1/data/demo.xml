@@ -1,0 +1,15 @@
+gestion_pedidos
+├── __init__.py
+├── __manifest__.py
+├── models
+│   ├── __init__.py
+│   └── models.py
+├── security
+│   └── ir.model.access.csv
+├── views
+│   ├── pedido_views.xml
+│   ├── templates.xml
+│   └── menus.xml
+├── data
+│   └── demo.xml
+└── README.md

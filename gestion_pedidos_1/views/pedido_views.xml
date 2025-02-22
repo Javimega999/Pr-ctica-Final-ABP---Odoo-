@@ -1,0 +1,140 @@
+<odoo>
+    <data>
+        <!-- Form View for Pedido -->
+        <record id="view_pedido_form" model="ir.ui.view">
+            <field name="name">gestion_pedidos.pedido.form</field>
+            <field name="model">gestion_pedidos.pedido</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" 
+                                string="Confirmar" 
+                                type="object" 
+                                class="oe_highlight"
+                                invisible="estado != 'borrador'"/>
+                        <button name="action_deliver" 
+                                string="Entregar" 
+                                type="object" 
+                                class="oe_highlight"
+                                invisible="estado != 'confirmado'"/>
+                        <button name="action_cancel" 
+                                string="Cancelar" 
+                                type="object"
+                                invisible="estado in ('cancelado', 'entregado')"/>
+                        <button name="action_draft" 
+                                string="Volver a Borrador" 
+                                type="object"
+                                invisible="estado != 'cancelado'"/>
+                        <field name="estado" widget="statusbar" options="{'clickable': '1'}" 
+                               statusbar_visible="borrador,confirmado,entregado,cancelado"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="fecha_pedido"/>
+                            <field name="cliente"/>
+                        </group>
+                        <notebook>
+                            <page string="Líneas de Pedido">
+                                <field name="lineas_pedido">
+                                    <tree editable="bottom">
+                                        <field name="producto_id"/>
+                                        <field name="cantidad"/>
+                                        <field name="precio_unitario"/>
+                                        <field name="subtotal"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group class="oe_subtotal_footer">
+                            <field name="total"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View for Pedido -->
+        <record id="view_pedido_tree" model="ir.ui.view">
+            <field name="name">gestion_pedidos.pedido.tree</field>
+            <field name="model">gestion_pedidos.pedido</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="fecha_pedido"/>
+                    <field name="cliente"/>
+                    <field name="estado"/>
+                    <field name="total" sum="Total"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Kanban View for Pedido -->
+        <record id="view_pedido_kanban" model="ir.ui.view">
+            <field name="name">gestion_pedidos.pedido.kanban</field>
+            <field name="model">gestion_pedidos.pedido</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="estado">
+                    <field name="name"/>
+                    <field name="cliente"/>
+                    <field name="fecha_pedido"/>
+                    <field name="estado"/>
+                    <field name="total"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <strong><field name="name"/></strong>
+                                    <div>Cliente: <field name="cliente"/></div>
+                                    <div>Fecha: <field name="fecha_pedido"/></div>
+                                    <div>Total: <field name="total"/></div>
+                                    <div>
+                                        <field name="estado" widget="label_selection" 
+                                               options="{'classes': {
+                                                   'borrador': 'default',
+                                                   'confirmado': 'success',
+                                                   'entregado': 'info',
+                                                   'cancelado': 'danger'}}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Search View for Pedido -->
+        <record id="view_pedido_search" model="ir.ui.view">
+            <field name="name">gestion_pedidos.pedido.search</field>
+            <field name="model">gestion_pedidos.pedido</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="cliente"/>
+                    <filter string="Borrador" name="draft" domain="[('estado','=','borrador')]"/>
+                    <filter string="Confirmado" name="confirmed" domain="[('estado','=','confirmado')]"/>
+                    <group expand="0" string="Agrupar Por">
+                        <filter string="Cliente" name="cliente" context="{'group_by':'cliente'}"/>
+                        <filter string="Estado" name="estado" context="{'group_by':'estado'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action for Pedido -->
+        <record id="action_pedidos" model="ir.actions.act_window">
+            <field name="name">Pedidos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gestion_pedidos.pedido</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_pedido_search"/>
+            <field name="context">{'search_default_draft': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear el primer pedido
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

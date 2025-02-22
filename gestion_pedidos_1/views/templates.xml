@@ -1,0 +1,13 @@
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Define template views here if needed -->
+        <template id="assets_backend" name="gestion_pedidos assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <!-- Add custom CSS/JS if needed -->
+            </xpath>
+        </template>
+    </data>
+</odoo>
